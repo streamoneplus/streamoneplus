@@ -1,0 +1,190 @@
+{% extends "nav.html" %}
+{% load static %}
+{% load hitcount_tags %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>{{video.title}}</title>
+<style>
+	 @media screen and (min-width:1024px){
+	
+	.vidDetails{background-color:#284a6f; margin-top:-18px;}
+	video{width:60%; height:400px; margin-left:auto; margin-right:auto; display:block}
+	.card-body{width:39%;}
+	#likeArea{}
+	}
+	@media screen and (max-width:1023px)and (min-width:360px){
+    video{width:auto; height:auto; margin-left:auto; margin-right:auto; margin-bottom:-50px; display:block}
+	.vidDetails{margin-top:-5px; margin-bottom:-7px; background-color:#020003;}
+	#likeArea{}
+	}
+	
+	.carousel{ counter-reset: my-sec-counter;}
+	.carousel-item::before{
+							counter-increment:my-sec-counter;
+							content: counter(my-sec-counter);
+							color:orange;
+							font-size:26px; 
+							font-weight:200px
+							
+							
+    }
+  
+	
+	</style>
+</head>
+<body >
+<div class="vidDetails" style="background-color:#000917;">
+ <div class="card lg:card-side bg-base-100 shadow-sm" style="background-color:#0d0d1d; width:99%; margin:3px">
+ 
+<video  controls  >
+    <source src="{{video.video.url}}" type="video/m4v">
+	<source src="{{video.video.url}}" type="video/mp4">
+	<source src="{{video.video.url}}" type="video/mov">
+	<source src="{{video.video.url}}" type="video/avi">
+	<source src="{{video.video.url}}" type="video/webm">
+	<source src="{{video.video.url}}" type="video/mkv">
+	Your browser does not support HTML5 video
+ </video>
+ <div class="card-body">
+<div class="card shadow-xl" id="likeArea">
+ <div class="mt-4 flex gap-4 " >
+ <div hx-get="{% url 'videos:video-like' video.id %}" hx-trigger="every 15s" hx-swap="innerHTML">
+   <span   class="inline-flex items-center gap-1   px-2 py-1 text-xs font-semibold text-orange-400">{% include "video/partials/like.html" %}</span>
+ </div>
+   <span class="inline-flex items-center gap-1 rounded-full bg-orange-50 px-2 py-1 text-xs font-semibold text-orange-400"><i class="fa fa-eye" aria-hidden="true"></i>{% get_hit_count for video %} </span> 
+ </div>
+ <div >
+	<div class="mt-4 flex gap-7 text-orange-400" >
+     <span  class="indicator"   style=" font-size:14px "><h1>CATEGORY<br>{{video.category.title}} </h1></span>
+     <span  class="indicator"   style=" font-size:14px  "><h1>TITLE <br>{{video.title}}</h1></span>
+    <span  class="indicator"   style="font-size:14px  "><h1>DATE <br>{{video.publish}}</h1></span>  
+   </div>
+ </div>
+ <hr>
+ <br>
+ <h1 class="card-title text-orange-600" >Synopsis</h1>
+<div style="padding:5px; color:white">
+
+<p>{{video.description}}</p>
+</div>
+ </div>
+</div>
+
+<br>
+
+</div>
+
+{% if video.category.title == 'Animations' %}
+{% include "video/partials/animation.html" %}
+
+{% elif video.category.title == 'Sport' %}
+{% include "video/partials/sport.html" %}
+
+{% elif video.category.title == 'Artistic' %}
+{% include "video/partials/artistic.html" %}
+
+{% elif video.category.title == 'Comic Videos' %}
+{% include "video/partials/comic.html" %}
+
+{% elif video.category.title == 'Crime Videos' %}
+{% include "video/partials/crime.html" %}
+
+{% elif video.category.title == 'Discovery' %}
+{% include "video/partials/discovery.html" %}
+
+{% elif video.category.title == 'Documentary' %}
+{% include "video/partials/documentary.html" %}
+
+{% elif video.category.title == 'Happening' %}
+{% include "video/partials/happening.html" %}
+
+{% elif video.category.title == 'Howto' %}
+{% include "video/partials/howto.html" %}
+
+{% elif video.category.title == 'Leadership and Motivation' %}
+{% include "video/partials/leadership.html" %}
+
+{% elif video.category.title == 'Movies' %}
+{% include "video/partials/movie.html" %}
+
+{% elif video.category.title == 'Music' %}
+{% include "video/partials/music.html" %}
+
+{% elif video.category.title == 'People and Event' %}
+{% include "video/partials/event.html" %}
+
+{% elif video.category.title == 'Pets and WildLife' %}
+{% include "video/partials/animal.html" %}
+
+{% elif video.category.title == 'Politics and Politician' %}
+{% include "video/partials/politics.html" %}
+
+{% elif video.category.title == 'Properties' %}
+{% include "video/partials/properties.html" %}
+
+{% elif video.category.title == 'Religion' %}
+{% include "video/partials/religion.html" %}
+
+{% elif video.category.title == 'STEM' %}
+{% include "video/partials/stem.html" %}
+
+{% endif %}
+
+
+<div  id="NewComment" style="margin-left:0px">
+	  <div id="commentingForm" style="margin:5px">
+        {% if request.user.is_authenticated %}
+		
+		<h1 style="color:white">Add Comment</h1>
+        <form method="post" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+		
+		
+	   
+	    {% else %}
+		 <button class="btn btn-active btn-primary" hx-get="/accounts/login/?next={{request.path}}"
+               hx-target="this" hx-swap="outerHTML" >Click to comment</button>
+       
+        {% endif %}
+     </div>
+	 <hr>
+       
+            {% with video.video_comments.count as total_comments %}
+            <h3 class="mt-5" style="color:white; margin:3px">
+                {{ total_comments }} comment{{ total_comments|pluralize }}
+            </h3>
+			
+        {% endwith %}
+	
+		
+      
+        {% if not video.video_comments.all %}
+          Be the first to open discussion
+        
+        {% else %}
+		      
+            {% for comment in all_comments %}
+          
+			<div style=" margin-bottom:3px;">					
+			  <p > {% include 'comment/comment.html' with comment=comment %}</p>
+			</div>
+			
+            {% endfor %}
+			
+        {% endif %}
+		
+      <p>{% include "comment/pagination.html" with page=all_comments %} </p>
+	 
+	</div>
+	
+
+ </body>
+ </html>
+ {% endblock %}

@@ -1,0 +1,52 @@
+{% if request.user.is_authenticated %}
+
+<div class="list-group list-group-horizontal btn-group" id='LikesArea' role="group">
+
+{% if request.user in video.likes.all %}
+<button class="btn btn-primary" style="  color:orange" 
+	hx-post="{% url 'videos:video-like' video.id %}"
+    id = "LikeButton"
+    hx-target ="#LikesArea"                    
+    hx-swap = "outerHTML">
+  <svg style="color:orange; " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="size-[1.2em]"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>
+  Liked
+</button> <span   class="inline-flex items-center gap-1   px-2 py-1 text-xs font-semibold text-orange-400">{{video.likes.count}} likes</span>
+{% else %}
+<button class="btn"
+	hx-post="{% url 'videos:video-like' video.id %}"
+    id = "LikeButton"
+    hx-target ="#LikesArea"                    
+    hx-swap = "outerHTML">
+  Like
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="size-[1.2em]"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>
+</button> <span   class="inline-flex items-center gap-1   px-2 py-1 text-xs font-semibold text-orange-400">{{video.likes.count}} likes</span>
+{% endif %}
+</div>
+
+{% else %}
+<div class="list-group list-group-horizontal btn-group" id='LikesArea' role="group" style="color:white">
+
+{% if request.user in video.likes.all %}
+<button class="btn btn-primary" style="  color:orange" 
+	hx-post="/accounts/login/?next={{request.path}}"
+    id = "LikeButton"
+    hx-target ="#likeArea"                    
+    hx-swap = "outerHTML"
+	hx-push-url="true">
+  <svg style="color:orange; " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="size-[1.2em]"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>
+  Liked
+</button> <span   class="inline-flex items-center gap-1   px-2 py-1 text-xs font-semibold text-orange-400">{{video.likes.count}} likes</span>
+{% else %}
+<button class="btn"
+	hx-post="/accounts/login/?next={{request.path}}"
+    id = "LikeButton"
+    hx-target ="#likeArea"                    
+    hx-swap = "outerHTML"
+	hx-push-url="true">
+  Like
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="size-[1.2em]"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>
+</button> <span   class="inline-flex items-center gap-1   px-2 py-1 text-xs font-semibold text-orange-400">{{video.likes.count}} likes</span>
+{% endif %}
+</div>
+{% endif %}
+

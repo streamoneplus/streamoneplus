@@ -1,0 +1,408 @@
+{% extends "nav.html" %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<style>
+	 @media screen and (min-width:1024px){
+	.carousel{margin-top:0; height:auto}
+	.titleA{ margin-left:1.5rem; font-size:16px; font-weight:200px; color:orange}
+	.videos{margin-top:320px}
+	}
+	@media screen and (max-width:1023px)and (min-width:360px){
+    .titleA{ margin-left:1.5rem; font-size:16px; font-weight:200px; color:orange}
+	.carousel{ width:100%}
+	.videos{margin-top:370px}
+    }
+	</style>
+	<title >StreamOne+</title>
+	<link rel="icon" type="image/x-icon" href="/media/image/realLogo2.jpg">
+</head>
+<body >
+
+<div class="videos" style="background-color:#284a6f;">
+ {% if animation %} 
+ <h1 class="titleA">Animations</h1>
+
+<div>
+	
+<ul class="carousel" style="margin:5px; width:98%">
+ {% for vid in animation %}
+	{% if vid.poster %}
+<li class="carousel-item w-1/3" style="margin:3px">
+	<a href="{{ vid.get_absolute_url }}"><img src="{{ vid.poster.url}}" class="w-full"/></a>
+	{% endif %}
+	{% endfor %}
+</li >
+<li class="carousel-item w-1/3" style="margin:3px">
+<a href="{% url 'videos:animation' %}"><img src="media/image/direction.jpg"/></a>
+</li>
+</ul>
+</div>
+{% else %}
+<span></span>
+{% endif %}
+
+{% if artistic %} 
+<h1 class="titleA">Artisctic Videos</h1>
+
+<div>
+	
+<ul class="carousel" style="margin:5px; width:98%">
+ {% for vid in artistic %}
+	{% if vid.poster %}
+<li class="carousel-item w-1/3" style="margin:3px">
+	<a href="{{ vid.get_absolute_url }}"><img src="{{ vid.poster.url}}" class="w-full"/></a>
+	{% endif %}
+	{% endfor %}
+</li >
+<li class="carousel-item w-1/3" style="margin:3px">
+<a href="{% url 'videos:artistic' %}"><img src="media/image/direction.jpg"/></a>
+</li>
+</ul>
+</div>
+{% else %}
+<span></span>
+{% endif %}
+
+
+{% if comic %} 
+<h1 class="titleA">Comic Videos</h1>
+
+<div>
+	
+<ul class="carousel" style="margin:5px; width:98%">
+ {% for vid in comic %}
+	{% if vid.poster %}
+<li class="carousel-item w-1/3" style="margin:3px">
+	<a href="{{ vid.get_absolute_url }}"><img src="{{ vid.poster.url}}" class="w-full"/></a>
+	{% endif %}
+	{% endfor %}
+</li >
+<li class="carousel-item w-1/3" style="margin:3px">
+<a href="{% url 'videos:comic' %}"><img src="media/image/direction.jpg"/></a>
+</li>
+</ul>
+</div>
+{% else %}
+<span></span>
+{% endif %}
+
+{% if crime %} 
+<h1 class="titleA">Crime Videos</h1>
+
+<div>
+	
+<ul class="carousel" style="margin:5px; width:98%">
+ {% for vid in crime %}
+	{% if vid.poster %}
+<li class="carousel-item w-1/3" style="margin:3px">
+	<a href="{{ vid.get_absolute_url }}"><img src="{{ vid.poster.url}}" class="w-full"/></a>
+	{% endif %}
+	{% endfor %}
+</li >
+<li class="carousel-item w-1/3" style="margin:3px">
+<a href="{% url 'videos:crime' %}"><img src="media/image/direction.jpg"/></a>
+</li>
+</ul>
+</div>
+{% else %}
+<span></span>
+{% endif %}
+
+{% if discovery %} 
+<h1 class="titleA">Discovery</h1>
+
+<div>
+	
+<ul class="carousel" style="margin:5px; width:98%">
+ {% for vid in discovery %}
+	{% if vid.poster %}
+<li class="carousel-item w-1/3" style="margin:3px">
+	<a href="{{ vid.get_absolute_url }}"><img src="{{ vid.poster.url}}" class="w-full"/></a>
+	{% endif %}
+	{% endfor %}
+</li >
+<li class="carousel-item w-1/3" style="margin:3px">
+<a href="{% url 'videos:discovery' %}"><img src="media/image/direction.jpg"/></a>
+</li>
+</ul>
+</div>
+{% else %}
+<span></span>
+{% endif %}
+
+
+{% if documentary %} 
+<h1 class="titleA">Documentary</h1>
+
+<div>
+	
+<ul class="carousel" style="margin:5px; width:98%">
+ {% for vid in documentary %}
+	{% if vid.poster %}
+<li class="carousel-item w-1/3" style="margin:3px">
+	<a href="{{ vid.get_absolute_url }}"><img src="{{ vid.poster.url}}" class="w-full"/></a>
+	{% endif %}
+	{% endfor %}
+</li >
+<li class="carousel-item w-1/3" style="margin:3px">
+<a href="{% url 'videos:documentary' %}"><img src="media/image/direction.jpg"/></a>
+</li>
+</ul>
+</div>
+{% else %}
+<span></span>
+{% endif %}
+
+{% if happening %} 
+<h1 class="titleA">Happening</h1>
+
+<div>
+	
+<ul class="carousel" style="margin:5px; width:98%">
+ {% for vid in happening %}
+	{% if vid.poster %}
+<li class="carousel-item w-1/3" style="margin:3px">
+	<a href="{{ vid.get_absolute_url }}"><img src="{{ vid.poster.url}}" class="w-full"/></a>
+	{% endif %}
+	{% endfor %}
+</li >
+<li class="carousel-item w-1/3" style="margin:3px">
+<a href="{% url 'videos:happening' %}"><img src="media/image/direction.jpg"/></a>
+</li>
+</ul>
+</div>
+{% else %}
+<span></span>
+{% endif %}
+
+
+{% if howto %} 
+<h1 class="titleA">How-to</h1>
+
+<div>
+	
+<ul class="carousel" style="margin:5px; width:98%">
+ {% for vid in howto %}
+	{% if vid.poster %}
+<li class="carousel-item w-1/3" style="margin:3px">
+	<a href="{{ vid.get_absolute_url }}"><img src="{{ vid.poster.url}}" class="w-full"/></a>
+	{% endif %}
+	{% endfor %}
+</li >
+<li class="carousel-item w-1/3" style="margin:3px">
+<a href="{% url 'videos:howto' %}"><img src="media/image/direction.jpg"/></a>
+</li>
+</ul>
+</div>
+{% else %}
+<span></span>
+{% endif %}
+
+
+{% if leadership %} 
+<h1 class="titleA">Leadership & Motivation</h1>
+
+<div>
+	
+<ul class="carousel" style="margin:5px; width:98%">
+ {% for vid in leadership %}
+	{% if vid.poster %}
+<li class="carousel-item w-1/3" style="margin:3px">
+	<a href="{{ vid.get_absolute_url }}"><img src="{{ vid.poster.url}}" class="w-full"/></a>
+	{% endif %}
+	{% endfor %}
+</li >
+<li class="carousel-item w-1/3" style="margin:3px">
+<a href="{% url 'videos:leadership' %}"><img src="media/image/direction.jpg"/></a>
+</li>
+</ul>
+</div>
+{% else %}
+<span></span>
+{% endif %}
+
+
+{% if movies %} 
+<h1 class="titleA">Movies</h1>
+
+<div>
+	
+<ul class="carousel" style="margin:5px; width:98%">
+ {% for vid in movies %}
+	{% if vid.poster %}
+<li class="carousel-item w-1/3" style="margin:3px">
+	<a href="{{ vid.get_absolute_url }}"><img src="{{ vid.poster.url}}" class="w-full"/></a>
+	{% endif %}
+	{% endfor %}
+</li >
+<li class="carousel-item w-1/3" style="margin:3px">
+<a href="{% url 'videos:movies' %}"><img src="media/image/direction.jpg"/></a>
+</li>
+</ul>
+</div>
+{% else %}
+<span></span>
+{% endif %}
+
+{% if music %} 
+<h1 class="titleA">Music</h1>
+
+<div>
+	
+<ul class="carousel" style="margin:5px; width:98%">
+ {% for vid in music %}
+	{% if vid.poster %}
+<li class="carousel-item w-1/3" style="margin:3px">
+	<a href="{{ vid.get_absolute_url }}"><img src="{{ vid.poster.url}}" class="w-full"/></a>
+	{% endif %}
+	{% endfor %}
+</li >
+<li class="carousel-item w-1/3" style="margin:3px">
+<a href="{% url 'videos:music' %}"><img src="media/image/direction.jpg"/></a>
+</li>
+</ul>
+</div>
+{% else %}
+<span></span>
+{% endif %}
+
+{% if event %} 
+<h1 class="titleA">People & Event</h1>
+
+<div>
+	
+<ul class="carousel" style="margin:5px; width:98%">
+ {% for vid in event %}
+	{% if vid.poster %}
+<li class="carousel-item w-1/3" style="margin:3px">
+	<a href="{{ vid.get_absolute_url }}"><img src="{{ vid.poster.url}}" class="w-full"/></a>
+	{% endif %}
+	{% endfor %}
+</li >
+<li class="carousel-item w-1/3" style="margin:3px">
+<a href="{% url 'videos:people' %}"><img src="media/image/direction.jpg"/></a>
+</li>
+</ul>
+</div>
+{% else %}
+<span></span>
+{% endif %}
+
+{% if animal %} 
+<h1 class="titleA">Pets & WildLife</h1>
+
+<div>
+	
+<ul class="carousel" style="margin:5px; width:98%">
+ {% for vid in animal %}
+	{% if vid.poster %}
+<li class="carousel-item w-1/3" style="margin:3px">
+	<a href="{{ vid.get_absolute_url }}"><img src="{{ vid.poster.url}}" class="w-full"/></a>
+	{% endif %}
+	{% endfor %}
+</li >
+<li class="carousel-item w-1/3" style="margin:3px">
+<a href="{% url 'videos:animal' %}"><img src="media/image/direction.jpg"/></a>
+</li>
+</ul>
+</div>
+{% else %}
+<span></span>
+{% endif %}
+
+{% if politics %} 
+<h1 class="titleA">Politics & Politician</h1>
+
+<div>
+	
+<ul class="carousel" style="margin:5px; width:98%">
+ {% for vid in politics %}
+	{% if vid.poster %}
+<li class="carousel-item w-1/3" style="margin:3px">
+	<a href="{{ vid.get_absolute_url }}"><img src="{{ vid.poster.url}}" class="w-full"/></a>
+	{% endif %}
+	{% endfor %}
+</li >
+<li class="carousel-item w-1/3" style="margin:3px">
+<a href="{% url 'videos:politics' %}"><img src="media/image/direction.jpg"/></a>
+</li>
+</ul>
+</div>
+{% else %}
+<span></span>
+{% endif %}
+
+
+{% if religion %} 
+<h1 class="titleA">Religion</h1>
+
+<div>
+	
+<ul class="carousel" style="margin:5px; width:98%">
+ {% for vid in religion %}
+	{% if vid.poster %}
+<li class="carousel-item w-1/3" style="margin:3px">
+	<a href="{{ vid.get_absolute_url }}"><img src="{{ vid.poster.url}}" class="w-full"/></a>
+	{% endif %}
+	{% endfor %}
+</li >
+<li class="carousel-item w-1/3" style="margin:3px">
+<a href="{% url 'videos:religion' %}"><img src="media/image/direction.jpg"/></a>
+</li>
+</ul>
+</div>
+{% else %}
+<span></span>
+{% endif %}
+
+{% if stem %} 
+<h1 class="titleA">STEM</h1>
+
+<div>
+	
+<ul class="carousel" style="margin:5px; width:98%">
+ {% for vid in stem %}
+	{% if vid.poster %}
+<li class="carousel-item w-1/3" style="margin:3px">
+	<a href="{{ vid.get_absolute_url }}"><img src="{{ vid.poster.url}}" class="w-full"/></a>
+	{% endif %}
+	{% endfor %}
+</li >
+<li class="carousel-item w-1/3" style="margin:3px">
+<a href="{% url 'videos:stem' %}"><img src="media/image/direction.jpg"/></a>
+</li>
+</ul>
+</div>
+{% else %}
+<span></span>
+{% endif %}
+
+{% if sport %} 
+<h1 class="titleA">Sport</h1>
+
+<div>
+	
+<ul class="carousel" style="margin:5px; width:98%">
+ {% for vid in sport %}
+	{% if vid.poster %}
+<li class="carousel-item w-1/3" style="margin:3px">
+	<a href="{{ vid.get_absolute_url }}"><img src="{{ vid.poster.url}}" class="w-full"/></a>
+	{% endif %}
+	{% endfor %}
+</li >
+<li class="carousel-item w-1/3" style="margin:3px">
+<a href="{% url 'videos:sport' %}"><img src="media/image/direction.jpg"/></a>
+</li>
+</ul>
+</div>
+{% else %}
+<span></span>
+{% endif %}
+</div>
+</body>
+</html>
+{% endblock %}

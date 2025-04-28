@@ -1,0 +1,50 @@
+
+
+{% block content %}
+
+<!DOCTYPE HTML>
+<html>
+<head>
+   {{ form.media }} 
+  
+</head>
+
+
+<body>
+ 
+ 
+ {% if comment %}
+ <div id="comment_confirm_form">
+  <p style="color:green">Congratulations, your comment has been added! Thanks</p>
+  <button class="btn btn-active " hx-get="{% url 'videos:post_comment' video.id %}"
+          hx-target="this"
+		  hx-swap="outerHTML">
+		  Comment Again
+   </button>
+   
+    </div>   
+  <div >
+   {% else %} 
+    {% if request.user.is_authenticated %}
+    <form  id="forms" hx-post="{% url 'videos:post_comment' video.id %}" hx-target="#NewComment" hx-swap="innerHTML" hx-trigger="submit" hx-on::after-request="this.reset()">
+	      {% csrf_token %}
+		  
+		  {{ widget.attrs.class }}
+		<h1>Add comment</h1> 
+        {{ form.as_p }}         
+     <button class="btn btn-active btn-primary" type="submit"  id="editing">Send comment</button>
+      <span ><a class="btn  btn-sm" href="javascript:history.go(-0)" hx-boost="true">cancel</a></span>
+    </form>
+ </div>	
+  {% else %}
+   <button class="btn btn-active btn-primary" hx-get="/accounts/login/?next={{request.path}}"
+    hx-target="#NewComment" hx-swap="outerHTML" >Click to comment</button>
+  {% endif %} 
+ 
+ {% endif %}
+  
+ {% endblock %}
+ 
+ </body>
+ 
+ </html>

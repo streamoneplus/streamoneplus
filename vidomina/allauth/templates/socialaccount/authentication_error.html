@@ -1,0 +1,219 @@
+{% extends "socialaccount/base_entrance.html" %}
+{% load i18n %}
+{% load allauth %}
+{% block head_title %}
+    {% trans "Third-Party Login Failure" %}
+{% endblock head_title %}
+{% block content %}
+
+
+<style>
+	.contactTop{background-color:#ffffff ;  width:16rem; height:5rem}
+	.phone{height:3rem; width:3rem; margin-left:auto; margin-right:auto; margin-top:1rem; color:white}
+
+
+	@media screen and (max-width:767px){
+	 div.scrollmenu{display:none;}
+	.horizontal{display:none}
+	.contactTop{display:none}
+	.services{display:grid; grid-template-columns:98%; gap:10px } 
+	.services{margin-left:1rem; margin-top:3rem }
+	.about{width:93%; margin-left:1rem;}  
+	.intro{position:absolute; top:0rem; left:0rem; width:200px;  color:orange; font-size:20px; font-weight:550px}
+	.categories{display:none}
+	.plusBackground{width:100%; height:30rem; margin-left:auto; display:block}
+	.family{position:relative; width:auto; height:auto;}
+	}
+  
+   @media screen and (max-width:1023px){
+   div.scrollmenu{display:none;}
+    .horizontal{display:none}
+    .contactTop{display:none}
+    .services{display:grid; grid-template-columns:98%; gap:10px } 
+    .services{margin-left:1rem; margin-top:3rem }
+    .about{width:93%; margin-left:1rem;}  
+    .intro{position:absolute; top:21rem; left:8rem;  color:orange; font-size:16px; font-weight:550px}
+	.family{position:relative; width:auto; height:auto;}
+	.plusBackground{width:100%; height:30rem;  display:block}
+	
+    }
+  @media screen and (min-width:1024px){
+	.square{display:none}
+	.user{display:none}
+	.services{display:grid; grid-template-columns:23% 23% 23% 23%; gap:10px }
+	.services{margin-left:5rem; margin-top:3rem }
+	.about{width:89%; margin-left:5rem;}
+	.intro{position:absolute; top:22rem; left:52rem;  color:orange; font-size:20px; font-weight:550px}
+	.email{text-align:center; margin-left:37px; color:#0049b7 }
+    .num{text-align:center; margin-top:-45px; margin-left:5px; color:#0049b7}
+	.plusBackground{width:auto; height:30rem;   }
+	.family{position:relative; width:auto; height:auto;}
+	div.scrollmenu {background-color:#1d232b; overflow: auto; white-space: nowrap; position:relative; margin-top:-5px}
+    div.scrollmenu a {display: inline-block; color: white; text-align: center; padding: 14px; text-decoration: none;}
+    div.scrollmenu a:hover {background-color: #777;}
+	}
+	.horizontal{margin-right:5rem}
+
+
+
+
+
+	</style>
+	
+
+<link rel="stylesheet" href="/static/css/dist/styles.css?v=1743113211">
+
+
+
+
+
+</head>
+<body hx-headers='{"x-csrftoken": "{{csrf_token}}"}'  hx-boost="true">
+
+<div class="family card  bg-base-100 card-xl shadow-sm">
+ <img class="plusBackground" src="media/image/newBackground.jpg/" style="margin-top:45px" /><b>
+
+<div class="navbar  shadow-sm" style=" height:7rem; margin-top:-33rem; background-color:#1d232b" id="home">
+  <div class="flex-1">
+    <a href="/" class="btn btn-ghost text-xl">
+	<img src="/media/image/streamone1.png"  alt="streamoneplusLogo" width="80px" style="margin-left:-10px; " /><span style=" color:orange; font-weight:800px; font-size:25px">Stream 
+	   <p style="margin-top:-6px; margin-left:-30px; color:#0049b7">One</p> <p style="position:relative; color:#0049b7; margin-top:-28px; margin-left:36px; font-size:35px; font-weight:800px">+</p></span>
+	</a>
+  </div>
+  <div class="horizontal">
+    <div class="flex-none">
+    <ul class="menu menu-horizontal px-1">
+	   {% if request.user.is_authenticated %}
+      <li>
+        <details class="dropdown">
+         <summary class=" m-1" style="font-size:18px; font-weight:500px; color:orange">Hi, {{ user.username }}</summary>
+          <ul class="menu dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+           {% if request.user.is_authenticated %}
+		    <li><a href="/accounts/email/?next={{request.path}}" class="user" style="font-size:18px; font-weight:500px; color:orange">Change Email</a></li>
+		    <li><a href="/accounts/password/change/?next={{request.path}}" class="user" style="font-size:18px; font-weight:500px; color:orange">Change Password</a></li>
+		    <li><a href="/accounts/logout/?next={{request.path}}" class="user" style="font-size:18px; font-weight:500px; color:orange">Log-out</a></li>
+		  {% else %}
+		    <li><a href="/accounts/login/?next={{request.path}}" class="user" style="font-size:18px; font-weight:500px; color:orange">Log-in</a></li>
+		    <li><a href="/accounts/signup/?next={{request.path}}" class="user" style="font-size:18px; font-weight:500px; color:orange">Sign-up</a></li>
+          {% endif %}
+          </ul>
+        </details>
+		</li>
+		{% else %}
+	  <li>
+		<h1 style="font-size:18px; font-weight:500px; color:orange">Hello, Guest</h1>
+	  </li>
+	  {% endif %}
+      <li><a href="#home" style="font-size:18px; font-weight:500px; color:orange">HOME</a></li>
+     
+	  <li><a href="{% url 'about' %}" style="font-size:18px; font-weight:500px; color:orange">ABOUT US</a></li>
+	<li><a href="{% url 'blog' %}" style="font-size:18px; font-weight:500px; color:orange">OUR BLOG</a></li>
+	<li><a href="#contactUs" class="active primary" style="font-size:18px; font-weight:500px; color:orange">CONTACT US</a></li>
+    </ul>
+  </div>
+  </div>
+  <div class="contactTop" >
+  <img class="phone"src="/media/image/contact.jpg" style="margin-left:0px"/><span><p class="num" >+1(917)267-0782</p> <p class="email">admin@streamoneplus.com</p></span>
+  
+  
+  
+  </div>
+ {% if request.user.is_authenticated %}
+<h3 class="user" style="color:orange; position:relative;  left:2.5rem; top:35px">Hi, {{ user.username }}</h3>
+{% else %}
+<h3 class="user" style="color:orange; position:relative;  left:2.5rem; top:35px">Hello, Guest</h3>
+{% endif %}
+  <div class="square " style="border:1px solid orange;  ">
+   <div class="dropdown dropdown-end">
+    <div class="flex-none"  <div tabindex="0" role="button">
+    <button  class="btn btn-square btn-ghost">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block h-5 w-5 stroke-current" style="color:orange"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path> </svg>
+    </button>
+  </div>
+   <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow" style="width:20rem">
+        <li>
+          <a class="justify-between" style="font-size:18px; font-weight:500px; color:orange">
+            HOME
+            
+          </a>
+        </li>
+        <li>
+		<details class="dropdown">
+		<summary style="font-size:18px; font-weight:500px; color:orange">VIDEO CATEGORIES</summary>
+		 <ul>
+		  <li><a href="{% url 'videos:discovery' %}" style="font-size:16px; font-weight:200px">Discovery</a></li>
+		  <li><a href="{% url 'videos:comic' %}" style="font-size:16px; font-weight:200px">Comic</a></li>
+		  <li><a href="{% url 'videos:animation' %}" style="font-size:16px; font-weight:200px">Animation</a></li>
+		  <li><a href="{% url 'videos:animation' %}"style="font-size:16px; font-weight:200px"></a>Leadership & Motivation</li>
+		  <li><a href="{% url 'videos:animal' %}"style="font-size:16px; font-weight:200px"></a>Pet & Wild Life</li>
+		   <li><a href="{% url 'videos:stem' %}"style="font-size:16px; font-weight:200px"></a>STEM</li>
+		    <li><a href="{% url 'videos:music' %}"style="font-size:16px; font-weight:200px"></a>Music</li>
+			 <li><a href="{% url 'videos:sport' %}"style="font-size:16px; font-weight:200px"></a>Sport</li>
+			  <li><a href="{% url 'videos:movies' %}"style="font-size:16px; font-weight:200px"></a>Movies</li>
+			  <li><a href="{% url 'videos:artistic' %}" style="font-size:16px; font-weight:200px"></a>Artistic</li>
+			  <li><a href="{% url 'videos:politics' %}"style="font-size:16px; font-weight:200px"></a>Politics & Politicians</li>
+			   <li><a href="{% url 'videos:crime' %}"style="font-size:16px; font-weight:200px"></a>Crimes</li>
+			    <li><a href="{% url 'videos:religion' %}"style="font-size:16px; font-weight:200px"></a>Religion</li>
+				 <li><a href="{% url 'videos:people' %}"style="font-size:16px; font-weight:200px"></a>People & Event</li>
+				 <li><a href="{% url 'videos:crime' %}"style="font-size:16px; font-weight:200px"></a>Crimes</li>
+		</details>
+		</li>
+        <li><a href="{% url 'about' %}" style="font-size:18px; font-weight:500px; color:orange">ABOUT US</a></li>
+		<li><a href="{% url 'blog' %}"  style="font-size:18px; font-weight:500px; color:orange">OUR BLOG</a></li>
+		<li><a href="#contactUs" style="font-size:18px; font-weight:500px; color:orange">CONTACT US</a></li>
+		<li>
+		 <div  style="border: 1px solid; background-color:orange; ">
+		   <img class="phone"src="/media/image/contact.jpg" style="margin-left:0px"/><span><p class="num" >+1(917)267-0782</p> <p class="email">admin@streamoneplus.com</p></span>
+
+		  </div>
+		</li>
+		{% if request.user.is_authenticated %}
+		<li><a href="/accounts/email/?next={{request.path}}" class="user" style="font-size:18px; font-weight:500px; color:orange">Change Email</a></li>
+		<li><a href="/accounts/password/change/?next={{request.path}}" class="user" style="font-size:18px; font-weight:500px; color:orange">Change Password</a></li>
+		<li><a href="/accounts/logout/?next={{request.path}}" class="user" style="font-size:18px; font-weight:500px; color:orange">Log-out</a></li>
+		{% else %}
+		 <li><a href="/accounts/login/?next={{request.path}}" class="user" style="font-size:18px; font-weight:500px; color:orange">Log-in</a></li>
+		 <li><a href="/accounts/signup/?next={{request.path}}" class="user" style="font-size:18px; font-weight:500px; color:orange">Sign-up</a></li>
+        {% endif %}
+       
+      </ul>
+  </div>
+</div>
+
+</div>
+
+
+<!--this place is for large screen displaying categories of videos-->
+<div class="scrollmenu">
+  <a href="{% url 'videos:animation' %}">Animation</a>
+  <a href="{% url 'videos:artistic' %}">Artistic</a>
+  <a href="{% url 'videos:comic' %}">Comic</a>
+  <a href="{% url 'videos:crime' %}">Crime</a>
+  <a href="{% url 'videos:discovery' %}">Discovery</a>
+  <a href="{% url 'videos:documentary' %}">Documentary</a>
+  <a href="{% url 'videos:happening' %}">Happening</a>  
+  <a href="{% url 'videos:howto' %}">How-to</a>
+  <a href="{% url 'videos:leadership' %}">Leadership & Motivation</a>
+  <a href="{% url 'videos:movies' %}">Movies</a>
+  <a href="{% url 'videos:music' %}">Music</a>
+  <a href="{% url 'videos:people' %}">People & Event</a>
+  <a href="{% url 'videos:animal' %}">Pets & WildLife</a>
+  <a href="{% url 'videos:politics' %}">Politics & Politician</a>
+  <a href="{% url 'videos:properties' %}">Properties</a>
+  <a href="{% url 'videos:religion' %}">Religion</a>
+  <a href="{% url 'videos:stem' %}">STEM</a>
+  <a href="{% url 'videos:sport' %}">Sport</a>
+</div>
+ 
+
+
+
+
+
+    {% element h1 %}
+        {% trans "Third-Party Login Failure" %}
+    {% endelement %}
+    {% element p %}
+        {% trans "An error occurred while attempting to login via your third-party account." %}
+    {% endelement %}
+{% endblock content %}

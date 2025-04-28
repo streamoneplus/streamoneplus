@@ -1,0 +1,29 @@
+{% for videos in discovery_videos %}
+
+	
+<div class="card card-side bg-base-100 shadow-sm" style="display:grid; grid-template-columns:50% 48%; gap:2px; margin:5px">
+   <figure >
+	<a href="{{ videos.get_absolute_url }}"><img src="{{ videos.poster.url}}" /></a>
+   </figure>
+  
+    <h2 class="card-title" style="color:orange">{{ videos.title }}</h2>
+   
+</div>
+		
+
+{% endfor %}
+
+ <div id="allVideos">
+	{% if discovery_videos.has_next  %}
+    <span style="font-size:40px"
+      hx-get="{% url 'videos:more-discovery-video' %}?page={{discovery_videos.next_page_number }}"
+      hx-swap="beforeend"
+      hx-target="#allVideos"
+    
+      hx-trigger="revealed">
+     </span>
+   	 {% else %} 
+     <p style="color:red">End</p>	 
+     {% endif %} 
+	</div>
+	

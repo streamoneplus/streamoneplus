@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+
+
+
+
+
+<footer class="footer sm:footer-horizontal bg-base-200 text-base-content p-10" style="background-color:#1d232b; color:orange">
+  <!--<nav>
+    <h6 class="footer-title">Services</h6>
+    <a class="link link-hover">Branding</a>
+    <a class="link link-hover">Design</a>
+    <a class="link link-hover">Marketing</a>
+    <a class="link link-hover">Advertisement</a>
+  </nav>-->
+  <nav>
+    <a  href="{% url 'about' %}" class="link link-hover">About us</a>
+	<a  href="{% url 'blog' %}" class="link link-hover">Blog</a>
+    
+  </nav>
+  <!--<nav>
+    <h6 class="footer-title">Legal</h6>
+    <a class="link link-hover">Terms of use</a>
+    <a class="link link-hover">Privacy policy</a>
+    <a class="link link-hover">Cookie policy</a>
+  </nav>-->
+  <!--<form>
+    <h6 class="footer-title">Newsletter</h6>
+    <fieldset class="w-80">
+      <label>Enter your email address</label>
+      <div class="join">
+        <input
+          type="text"
+          placeholder="username@site.com"
+          class="input input-bordered join-item" />
+        <button class="btn btn-primary join-item">Subscribe</button>
+      </div>
+    </fieldset>
+  </form>-->
+
+ 
+ <aside >
+  <p style="margin-left:-30px">Copyright &copy; {% now "Y" %} - All right reserved by <a  href="{% url 'homepage' %}" ><span style=" color:orange; font-weight:800px; font-size:15px">Stream 
+	   <p style="margin-top:-27px; margin-left:290px; color:#0049b7">One</p> <p style="position:relative; color:#0049b7; margin-top:-39px; margin-left:312px; font-size:35px; font-weight:800px">+</p></span></a></p>
+ </aside>
+ 
+</footer>
+</body>
+</html>
